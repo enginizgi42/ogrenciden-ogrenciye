@@ -1,0 +1,95 @@
+/* Home.css */
+
+/* Header kısmı için stil */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ddd;
+    background-color: rgba(240, 248, 255, 0.8);
+  }
+  
+  .logo {
+    width: 70px; /* Logo boyutunu büyüttüm */
+    height: 70px;
+    margin-right: 10px;
+  }
+  
+  .header-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .header-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .header-button {
+    font-size: 1em;
+    color: #333;
+  }
+  
+  .home-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f9;
+  }
+  
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    flex-grow: 1; /* Sayfanın kalanını kapla */
+    padding: 20px;
+    box-sizing: border-box;
+    height: calc(100vh - 80px); /* Header’ın altındaki alanı kaplayacak şekilde */
+  }
+  
+  .module-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(200, 200, 200, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .module-section:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 218, 185, 0.8);
+  }
+  
+  .module-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .module-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  
+  .module-description {
+    list-style-type: disc;
+    padding: 0;
+    margin: 0;
+    color: #666;
+    text-align: left;
+    font-size: 0.9em;
+    line-height: 1.5em;
+  }
+  
