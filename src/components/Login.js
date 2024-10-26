@@ -22,7 +22,7 @@ function Login() {
       );
 
       if (response.data.success) {
-        message.success("Başarıyla giriş yapıldıi!");
+        message.success("Başarıyla giriş yapıldı!");
         localStorage.setItem("token", response.data.token);
         navigate("/home");
       } else {
