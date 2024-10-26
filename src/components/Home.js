@@ -70,7 +70,7 @@ function Home() {
             Hesabım
           </Button>
           <Button type="text" icon={<LogoutOutlined />} onClick={handleLogout} className="header-button">
-            Çıkış
+            Çıkışş
           </Button>
         </div>
       </header>
