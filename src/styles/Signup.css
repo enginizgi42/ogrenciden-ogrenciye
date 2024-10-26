@@ -1,0 +1,40 @@
+/* Sayfa boyutunda kapsayıcı */
+.signup-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #007cf0, #00dfd8); /* Arka plan rengi login sayfasıyla aynı */
+}
+
+/* Form kutusu */
+.signup-form {
+  width: 400px;
+  padding: 40px;
+  background-color: #e8f4ff; /* Form arka plan rengi login ile uyumlu */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ant-btn-primary {
+  background-color: #6a0dad;
+  border-color: #6a0dad;
+  width: 100%;
+}
+
+.ant-btn-primary:hover {
+  background-color: #7d3fd2;
+  border-color: #7d3fd2;
+}
+
+.ant-input {
+  height: 40px;
+}
