@@ -24,7 +24,7 @@ function Home() {
       image: "/images/dersilani2.webp",
       link: "/dersilani2",
       description: [
-        "Özel ders veya grup tarik çalışmaları için ilan verin.",
+        "Özel ders veya grup çalışmaları için ilan verin.",
         "Ders kategorisine göre arama yapılabilir.",
         "Eğitim hizmetleri için geniş bir öğrenci kitlesine ulaşın."
       ]
