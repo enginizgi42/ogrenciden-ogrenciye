@@ -1,0 +1,109 @@
+/* Profile.css */
+
+.profile-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .profile-logo {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .profile-header h2 {
+    font-size: 2rem;
+    color: #4a90e2;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  .profile-info {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  .profile-info label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    color: #333;
+  }
+  
+  .profile-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  .profile-info input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .profile-actions {
+    text-align: center;
+  }
+  
+  .edit-button, .save-button, .cancel-button {
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .edit-button {
+    background-color: #4a90e2;
+    color: #ffffff;
+  }
+  
+  .save-button {
+    background-color: #28a745;
+    color: #ffffff;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+  
+  .edit-button:hover {
+    background-color: #357ab8;
+    transform: scale(1.05);
+  }
+  
+  .save-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  
+  .cancel-button:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+  

@@ -1,40 +1,110 @@
-/* Sayfa boyutunda kapsayıcı */
+/* Signup.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, rgba(0, 123, 255, 0.8), rgba(0, 195, 255, 0.6)); /* Transparan gradient arka plan */
+}
+
 .signup-container {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #007cf0, #00dfd8); /* Arka plan rengi login sayfasıyla aynı */
+  height: 100vh;
+  padding: 20px; /* Mobilde taşma sorunlarını azaltmak için kenar boşlukları eklendi */
 }
 
-/* Form kutusu */
 .signup-form {
-  width: 400px;
-  padding: 40px;
-  background-color: #e8f4ff; /* Form arka plan rengi login ile uyumlu */
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.95); /* Transparan beyaz arka plan */
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
   text-align: center;
+  width: 400px; /* Form genişliği biraz daha küçültüldü */
+  max-width: 100%; /* Formun taşmaması için maksimum genişlik ayarlandı */
+}
+
+.signup-logo {
+  width: 130px; /* Logonun boyutu daha da küçültüldü */
+  margin-bottom: 15px; /* Logo ile form arası boşluk azaltıldı */
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #2c3e50; /* Başlık rengini daha koyu hale getirdik */
   font-weight: bold;
-  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.signup-form .ant-input,
+.signup-form .ant-input-password {
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px; /* Boşluk azaltıldı */
+  font-size: 1rem;
+  border: 1px solid #b0bec5;
+  height: 45px; /* Eşit yükseklik küçültüldü */
+  width: 100%; /* Tam genişlik */
+  transition: border-color 0.3s ease;
+}
+
+.signup-form .ant-input-password {
+  position: relative;
+}
+
+.signup-form .ant-input-password .ant-input-suffix {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: all; /* Kullanıcı göz simgesine tıklayabilsin */
+}
+
+.signup-form .ant-input,
+.signup-form .ant-input-password {
+  box-shadow: none; /* İkinci kutucuğu görünmez yapmak için gölge kaldırıldı */
+}
+
+.signup-form .ant-input:focus,
+.signup-form .ant-input-password:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
 }
 
 .ant-btn-primary {
-  background-color: #6a0dad;
-  border-color: #6a0dad;
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  font-size: 1.2rem;
+  height: 50px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   width: 100%;
 }
 
 .ant-btn-primary:hover {
-  background-color: #7d3fd2;
-  border-color: #7d3fd2;
+  background-color: #357ab8;
+  transform: scale(1.05);
 }
 
-.ant-input {
-  height: 40px;
+@media (max-width: 768px) {
+  .signup-form {
+    width: 90%;
+  }
+
+  .signup-logo {
+    width: 100px; /* Mobilde logo boyutunu küçültüyoruz */
+  }
 }

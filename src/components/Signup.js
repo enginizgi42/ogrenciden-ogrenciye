@@ -1,3 +1,5 @@
+// Signup.js
+
 import React, { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +55,7 @@ function Signup() {
   return (
     <div className="signup-container">
       <div className="signup-form">
+        <img src="/images/logo.jpg" alt="Logo" className="signup-logo" />
         <h2>Kayıt Ol</h2>
         <Form layout="vertical" onFinish={handleSignup}>
           <Form.Item label="Ad">
