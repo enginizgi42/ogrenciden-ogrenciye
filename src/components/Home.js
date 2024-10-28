@@ -4,7 +4,6 @@ import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 
-
 function Home() {
   const navigate = useNavigate();
 
@@ -16,8 +15,8 @@ function Home() {
       description: [
         "Ders kitapları, elektronik eşyalar ve kıyafetler gibi eşyaları listeleyin.",
         "Kategori ve fiyat filtreleri ile arama yapın.",
-        "Yapay zeka destekli fiyat önerisi alın."
-      ]
+        "Yapay zeka destekli fiyat önerisi alın.",
+      ],
     },
     {
       title: "Ders İlanı Verme",
@@ -26,8 +25,8 @@ function Home() {
       description: [
         "Özel ders veya grup çalışmaları için ilan verin.",
         "Ders kategorisine göre arama yapılabilir.",
-        "Eğitim hizmetleri için geniş bir öğrenci kitlesine ulaşın."
-      ]
+        "Eğitim hizmetleri için geniş bir öğrenci kitlesine ulaşın.",
+      ],
     },
     {
       title: "Not Paylaşma",
@@ -36,8 +35,8 @@ function Home() {
       description: [
         "Ders notlarınızı paylaşarak diğer öğrencilere yardımcı olun.",
         "1-5 yıldız arasında puanlama sistemi ile notlarınızı değerlendirin.",
-        "Yüksek puan alan notlar 'Trend Notlar' bölümünde öne çıkar."
-      ]
+        "Yüksek puan alan notlar 'Trend Notlar' bölümünde öne çıkar.",
+      ],
     },
     {
       title: "Ev Arkadaşı Bulma",
@@ -46,9 +45,9 @@ function Home() {
       description: [
         "Profil analizi ile benzer karakterdeki kişilerle eşleşin.",
         "Ev arkadaşı arayışınızı duyurmak için ilan oluşturun.",
-        "İlgilenenlerle doğrudan iletişim kurun."
-      ]
-    }
+        "İlgilenenlerle doğrudan iletişim kurun.",
+      ],
+    },
   ];
 
   const handleLogout = () => {
@@ -61,7 +60,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="home-wrapper">
       <header className="header">
         <img src="/images/logo.jpg" alt="Logo" className="logo" />
         <h1 className="header-title">Öğrenciden Öğrenciye</h1>

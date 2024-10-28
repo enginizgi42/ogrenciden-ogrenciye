@@ -41,27 +41,29 @@ function Login() {
     <div className="login-page">
       <div className="login-container">
         <img src="/images/logo.jpg" alt="Logo" className="login-logo" />
-        <h2>Hoşgeldiniz</h2>
+        <h2>HOŞGELDİNİZ</h2>
         <Form layout="vertical" onFinish={handleLogin} className="login-form">
-          <Form.Item label={<span className="input-label">Kullanıcı Adı</span>} style={{ marginBottom: "15px" }}>
+          <Form.Item label={<span className="input-label">E-posta Adresi</span>}>
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Lütfen @edu.tr formatı ile giriniz"
               required
+              className="input-field"
             />
           </Form.Item>
-          <Form.Item label={<span className="input-label">Şifre</span>} style={{ marginBottom: "15px" }}>
+          <Form.Item label={<span className="input-label">Şifre</span>}>
             <Input.Password
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Şifrenizi giriniz"
               required
+              className="input-field"
             />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block className="login-button">
               Giriş Yap
             </Button>
           </Form.Item>

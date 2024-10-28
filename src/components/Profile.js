@@ -1,32 +1,26 @@
-// Profile.js
-
 import React, { useState } from 'react';
 import "../styles/Profile.css";
 
 const Profile = () => {
-  // Kullanıcı bilgilerini yönetmek için state'ler
   const [profileInfo, setProfileInfo] = useState({
     name: 'Mevcut Kullanıcı',
     email: 'kullanici@example.com',
-    birthDate: '1990-01-01',
-    phoneNumber: '123-456-7890'
+    phoneNumber: '123-456-7890',
+    gender: 'Erkek'
   });
   const [isEditing, setIsEditing] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // Bilgileri düzenleme durumunu yönetme
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
 
-  // Bilgi güncelleme işlemleri
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfileInfo({ ...profileInfo, [name]: value });
   };
 
-  // Şifre güncelleme
   const handlePasswordChange = (e) => {
     setNewPassword(e.target.value);
   };
@@ -35,13 +29,11 @@ const Profile = () => {
     setConfirmPassword(e.target.value);
   };
 
-  // Güncelleme işlemlerini kaydetme
   const handleSave = () => {
-    if (newPassword !== confirmPassword) {
+    if (newPassword && newPassword !== confirmPassword) {
       alert('Şifreler eşleşmiyor. Lütfen kontrol edin.');
       return;
     }
-    // Şu an sadece konsola basılıyor, daha sonra API entegrasyonu eklenebilir
     console.log('Güncellenmiş Bilgiler:', profileInfo);
     console.log('Yeni Şifre:', newPassword);
     setIsEditing(false);
@@ -51,44 +43,14 @@ const Profile = () => {
     <div className="profile-container">
       <div className="profile-header">
         <img src="/images/logo.jpg" alt="Logo" className="profile-logo" />
-        <h2>Profilim</h2>
+        <h2>KULLANICI BİLGİLERİ</h2>
       </div>
       <div className="profile-info">
         <label>Ad Soyad:</label>
-        {isEditing ? (
-          <input
-            type="text"
-            name="name"
-            value={profileInfo.name}
-            onChange={handleChange}
-          />
-        ) : (
-          <p>{profileInfo.name}</p>
-        )}
+        <p>{profileInfo.name}</p>
 
         <label>E-Posta:</label>
-        {isEditing ? (
-          <input
-            type="email"
-            name="email"
-            value={profileInfo.email}
-            onChange={handleChange}
-          />
-        ) : (
-          <p>{profileInfo.email}</p>
-        )}
-
-        <label>Doğum Tarihi:</label>
-        {isEditing ? (
-          <input
-            type="date"
-            name="birthDate"
-            value={profileInfo.birthDate}
-            onChange={handleChange}
-          />
-        ) : (
-          <p>{profileInfo.birthDate}</p>
-        )}
+        <p>{profileInfo.email}</p>
 
         <label>Telefon Numarası:</label>
         {isEditing ? (
@@ -101,6 +63,9 @@ const Profile = () => {
         ) : (
           <p>{profileInfo.phoneNumber}</p>
         )}
+
+        <label>Cinsiyet:</label>
+        <p>{profileInfo.gender}</p>
 
         {isEditing && (
           <>
@@ -135,4 +100,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
