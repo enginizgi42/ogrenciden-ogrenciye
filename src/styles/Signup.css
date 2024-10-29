@@ -21,6 +21,7 @@
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
+  border-radius: 30px;
 }
 
 .signup-logo {
@@ -32,7 +33,7 @@
 
 .signup-title {
   font-size: 1.8rem;
-  color: #333;
+  color: #4a90e2;
   font-weight: bold;
   margin-top: 10%;
   margin-right: 17%;
@@ -46,6 +47,7 @@
 
 .form-item {
   flex: 1;
+  font-weight: bold;
 }
 
 .input-field {
