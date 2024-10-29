@@ -8,7 +8,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState(""); // Telefon numarası eklendi
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [gender, setGender] = useState(null);
@@ -32,7 +32,7 @@ function Signup() {
           email,
           firstName,
           lastName,
-          phoneNumber: phone, // Telefon numarası eklendi
+          phoneNumber: phone,
           password,
           gender,
         },
@@ -63,7 +63,7 @@ function Signup() {
         </div>
         <Form layout="vertical" onFinish={handleSignup}>
           <div className="form-row">
-            <Form.Item label={<span className="bold-label">Ad</span>} required>
+            <Form.Item label={<span className="bold-label">Ad</span>} required className="form-item">
               <Input
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -71,7 +71,7 @@ function Signup() {
                 className="input-field"
               />
             </Form.Item>
-            <Form.Item label={<span className="bold-label">Soyad</span>} required>
+            <Form.Item label={<span className="bold-label">Soyad</span>} required className="form-item">
               <Input
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -81,7 +81,7 @@ function Signup() {
             </Form.Item>
           </div>
           <div className="form-row">
-            <Form.Item label={<span className="bold-label">E-posta</span>} required>
+            <Form.Item label={<span className="bold-label">E-posta</span>} required className="form-item">
               <Input
                 type="email"
                 value={email}
@@ -90,7 +90,7 @@ function Signup() {
                 className="input-field"
               />
             </Form.Item>
-            <Form.Item label={<span className="bold-label">Telefon</span>} required>
+            <Form.Item label={<span className="bold-label">Telefon</span>} required className="form-item">
               <Input
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -100,7 +100,7 @@ function Signup() {
             </Form.Item>
           </div>
           <div className="form-row">
-            <Form.Item label={<span className="bold-label">Şifre</span>} required>
+            <Form.Item label={<span className="bold-label">Şifre</span>} required className="form-item">
               <Input.Password
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -108,7 +108,7 @@ function Signup() {
                 className="input-field"
               />
             </Form.Item>
-            <Form.Item label={<span className="bold-label">Şifre Doğrulama</span>} required>
+            <Form.Item label={<span className="bold-label">Şifre Doğrulama</span>} required className="form-item">
               <Input.Password
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -117,7 +117,7 @@ function Signup() {
               />
             </Form.Item>
           </div>
-          <Form.Item label={<span className="bold-label">Cinsiyet</span>} required>
+          <Form.Item label={<span className="bold-label">Cinsiyet</span>} required className="form-item">
             <Radio.Group onChange={(e) => setGender(e.target.value)} value={gender} className="radio-group">
               <Radio value="Erkek">Erkek</Radio>
               <Radio value="Kadın">Kadın</Radio>
