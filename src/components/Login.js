@@ -24,6 +24,7 @@ function Login() {
       if (response.data.success) {
         message.success("Başarıyla giriş yapıldı!");
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userEmail", email); // Kullanıcının e-posta adresini kaydetme
         navigate("/home");
       } else {
         message.error("Kullanıcı adı veya şifre hatalı!");

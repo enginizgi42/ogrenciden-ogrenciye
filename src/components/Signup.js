@@ -8,6 +8,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState(""); // Telefon numarası eklendi
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [gender, setGender] = useState(null);
@@ -31,6 +32,7 @@ function Signup() {
           email,
           firstName,
           lastName,
+          phoneNumber: phone, // Telefon numarası eklendi
           password,
           gender,
         },
@@ -50,7 +52,7 @@ function Signup() {
     }
   };
 
-  const isFormValid = email && firstName && lastName && password && confirmPassword && gender;
+  const isFormValid = email && firstName && lastName && phone && password && confirmPassword && gender;
 
   return (
     <div className="signup-container">
@@ -61,7 +63,7 @@ function Signup() {
         </div>
         <Form layout="vertical" onFinish={handleSignup}>
           <div className="form-row">
-            <Form.Item label={<span className="bold-label">Ad</span>} className="form-item">
+            <Form.Item label={<span className="bold-label">Ad</span>} required>
               <Input
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -69,7 +71,7 @@ function Signup() {
                 className="input-field"
               />
             </Form.Item>
-            <Form.Item label={<span className="bold-label">Soyad</span>} className="form-item">
+            <Form.Item label={<span className="bold-label">Soyad</span>} required>
               <Input
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -79,7 +81,7 @@ function Signup() {
             </Form.Item>
           </div>
           <div className="form-row">
-            <Form.Item label={<span className="bold-label">E-posta</span>} className="form-item">
+            <Form.Item label={<span className="bold-label">E-posta</span>} required>
               <Input
                 type="email"
                 value={email}
@@ -88,12 +90,17 @@ function Signup() {
                 className="input-field"
               />
             </Form.Item>
-            <Form.Item label={<span className="bold-label">Telefon</span>} className="form-item">
-              <Input placeholder="Telefon numaranızı girin" className="input-field" />
+            <Form.Item label={<span className="bold-label">Telefon</span>} required>
+              <Input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Telefon numaranızı girin"
+                className="input-field"
+              />
             </Form.Item>
           </div>
           <div className="form-row">
-            <Form.Item label={<span className="bold-label">Şifre</span>} className="form-item">
+            <Form.Item label={<span className="bold-label">Şifre</span>} required>
               <Input.Password
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -101,7 +108,7 @@ function Signup() {
                 className="input-field"
               />
             </Form.Item>
-            <Form.Item label={<span className="bold-label">Şifre Doğrulama</span>} className="form-item">
+            <Form.Item label={<span className="bold-label">Şifre Doğrulama</span>} required>
               <Input.Password
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -110,7 +117,7 @@ function Signup() {
               />
             </Form.Item>
           </div>
-          <Form.Item label={<span className="bold-label">Cinsiyet</span>} className="form-item">
+          <Form.Item label={<span className="bold-label">Cinsiyet</span>} required>
             <Radio.Group onChange={(e) => setGender(e.target.value)} value={gender} className="radio-group">
               <Radio value="Erkek">Erkek</Radio>
               <Radio value="Kadın">Kadın</Radio>

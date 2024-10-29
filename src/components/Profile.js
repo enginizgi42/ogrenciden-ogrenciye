@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { message } from 'antd';
 import "../styles/Profile.css";
 
 const Profile = () => {
-  const [profileInfo, setProfileInfo] = useState({
-    name: 'Mevcut Kullanıcı',
-    email: 'kullanici@example.com',
-    phoneNumber: '123-456-7890',
-    gender: 'Erkek'
-  });
+  const [profileInfo, setProfileInfo] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const email = localStorage.getItem('userEmail'); // localStorage'den email alınıyor
+
+  useEffect(() => {
+    // Profil bilgilerini almak için istek gönderiyoruz
+    axios.get(`http://localhost:5181/api/Auth/profile/${email}`)
+      .then(response => {
+        if (response.data.success) {
+          setProfileInfo(response.data.data);
+        } else {
+          console.error('Profil bilgileri alınamadı:', response.data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Profil bilgileri alınırken hata oluştu:', error);
+      });
+  }, [email]);
+
+  // Kullanıcı bilgileri yüklendiyse göster, yoksa "Yükleniyor..." göster
+  if (!profileInfo) return <div>Yükleniyor...</div>;
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -30,14 +46,37 @@ const Profile = () => {
   };
 
   const handleSave = () => {
-    if (newPassword && newPassword !== confirmPassword) {
-      alert('Şifreler eşleşmiyor. Lütfen kontrol edin.');
+    if (!profileInfo.phoneNumber) {
+      message.error("Telefon numarası boş olamaz!");
       return;
     }
-    console.log('Güncellenmiş Bilgiler:', profileInfo);
-    console.log('Yeni Şifre:', newPassword);
-    setIsEditing(false);
+  
+    if (newPassword && newPassword !== confirmPassword) {
+      message.error('Şifreler eşleşmiyor. Lütfen kontrol edin.');
+      return;
+    }
+  
+    axios.put('http://localhost:5181/api/Auth/profile/update', {
+      email: profileInfo.email,
+      phoneNumber: profileInfo.phoneNumber,
+      newPassword: newPassword
+    })
+    .then(response => {
+      if (response.data.success) {
+        message.success('Profil başarıyla güncellendi!');
+        setIsEditing(false); // Düzenleme modundan çık
+        setNewPassword(''); // Şifre alanlarını temizle
+        setConfirmPassword('');
+      } else {
+        message.error('Profil güncellenemedi. Lütfen tekrar deneyin.');
+      }
+    })
+    .catch(error => {
+      message.error('Profil güncelleme sırasında hata oluştu.');
+      console.error('Profil güncelleme sırasında hata oluştu:', error);
+    });
   };
+  
 
   return (
     <div className="profile-container">
@@ -46,11 +85,17 @@ const Profile = () => {
         <h2>KULLANICI BİLGİLERİ</h2>
       </div>
       <div className="profile-info">
-        <label>Ad Soyad:</label>
-        <p>{profileInfo.name}</p>
+        <label>Ad:</label>
+        <p>{profileInfo.firstName}</p>
+
+        <label>Soyad:</label>
+        <p>{profileInfo.lastName}</p>
 
         <label>E-Posta:</label>
         <p>{profileInfo.email}</p>
+
+        <label>Cinsiyet:</label>
+        <p>{profileInfo.gender}</p>
 
         <label>Telefon Numarası:</label>
         {isEditing ? (
@@ -63,9 +108,6 @@ const Profile = () => {
         ) : (
           <p>{profileInfo.phoneNumber}</p>
         )}
-
-        <label>Cinsiyet:</label>
-        <p>{profileInfo.gender}</p>
 
         {isEditing && (
           <>
