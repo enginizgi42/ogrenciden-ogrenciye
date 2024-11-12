@@ -54,6 +54,30 @@ function Signup() {
 
   const isFormValid = email && firstName && lastName && phone && password && confirmPassword && gender;
 
+  const handlePhoneChange = (e) => {
+    let input = e.target.value;
+
+    // 0 ile başlarsa uyarı ver ve girişi önle
+    if (input.startsWith("0")) {
+      message.error("Lütfen telefon numaranızı 0 olmadan tuşlayınız..");
+      return;
+    }
+
+    // Sadece sayıları al ve maksimum 10 haneye sınırla
+    input = input.replace(/\D/g, "").substring(0, 10);
+
+    // Formatı uygula: 531-531-31-31
+    if (input.length >= 7) {
+      input = input.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, "$1-$2-$3-$4");
+    } else if (input.length >= 4) {
+      input = input.replace(/^(\d{3})(\d{3})$/, "$1-$2");
+    } else if (input.length >= 3) {
+      input = input.replace(/^(\d{3})$/, "$1-");
+    }
+
+    setPhone(input);
+  };
+
   return (
     <div className="signup-container">
       <div className="signup-form">
@@ -93,8 +117,8 @@ function Signup() {
             <Form.Item label={<span className="bold-label">Telefon</span>} required className="form-item">
               <Input
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Telefon numaranızı girin"
+                onChange={handlePhoneChange}
+                placeholder="Telefon numaranızı girin (Örn: 531-531-31-31)"
                 className="input-field"
               />
             </Form.Item>
