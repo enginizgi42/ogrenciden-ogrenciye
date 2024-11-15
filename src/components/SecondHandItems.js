@@ -25,37 +25,37 @@ function SecondHandItems() {
     navigate("/profile");
   };
 
-  // Kategoriler
+  // Kategoriler ve Alt Ürünler
   const categories = [
     {
       icon: "📚",
       title: "Ders Materyalleri",
-    
+      items: ["Ders Kitapları", "Notlar", "Kırtasiye Malzemeleri", "Test Kitapları"],
     },
     {
       icon: "💻",
       title: "Elektronik",
-      
+      items: ["Telefonlar", "Dizüstü Bilgisayarlar", "Kulaklıklar", "Tabletler"],
     },
     {
       icon: "🛋️",
       title: "Ev ve Mobilya",
-    
+      items: ["Masa", "Sandalye", "Kitaplık", "Dekoratif Ürünler"],
     },
     {
       icon: "👗",
       title: "Giyim ve Moda",
-     
+      items: ["Kadın Kıyafetleri", "Erkek Kıyafetleri", "Ayakkabılar", "Aksesuarlar"],
     },
     {
       icon: "🎮",
       title: "Spor ve Hobi",
-    
+      items: ["Spor Ekipmanları", "Müzik Aletleri", "Oyun Konsolları", "Puzzle"],
     },
     {
       icon: "📦",
       title: "Diğer",
-    
+      items: ["Evcil Hayvan Malzemeleri", "Seyahat Çantaları", "Bahçe Ekipmanları"],
     },
   ];
 
@@ -94,13 +94,19 @@ function SecondHandItems() {
         </div>
       </header>
 
-      {/* Sol tarafta alt alta kategori kartları */}
+      {/* Kategori Sidebar */}
       <div className="sidebar">
         {categories.map((category, index) => (
           <div key={index} className="category-card">
             <div className="category-icon">{category.icon}</div>
             <h3 className="category-title">{category.title}</h3>
-            <p className="category-description">{category.description}</p>
+            <div className="category-dropdown">
+              <ul>
+                {category.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
       </div>

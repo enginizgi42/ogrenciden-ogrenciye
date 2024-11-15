@@ -78,13 +78,13 @@
   padding: 10px 5px;
   margin: 5px 0;
   width: 100%;
-  height: 50%;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 0.8em;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1em; /* Kart yazı boyutu büyütüldü */
+  position: relative; /* Açılır pencere için */
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .category-card:hover {
@@ -92,17 +92,58 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Dropdown Menüsü */
+.category-dropdown {
+  display: none; /* Varsayılan olarak gizli */
+  position: absolute;
+  top: 0; /* Kartla aynı hizada */
+  left: 100%; /* Kartın sağ tarafına yerleştir */
+  margin-left: 10px; /* Kart ile dropdown arasında boşluk */
+  background-color: #f0f8ff; /* Daha uyumlu bir arka plan rengi */
+  border: 1px solid #4a90e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 20;
+  width: 250px; /* Genişlik artırıldı */
+  text-align: left;
+}
+
+/* Dropdown Menüsü Görünürlük */
+.category-card:hover .category-dropdown,
+.category-dropdown:hover {
+  display: block; /* Hover durumunda görünür kalsın */
+}
+
+/* Dropdown Listesi */
+.category-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-dropdown ul li {
+  padding: 10px 0; /* Daha fazla boşluk */
+  font-size: 1.1em; /* Yazı boyutu büyütüldü */
+  color: #4a90e2;
+  transition: color 0.2s, background-color 0.2s;
+  cursor: pointer;
+}
+
+.category-dropdown ul li:hover {
+  color: #ffffff;
+  background-color: #4a90e2; /* Hover durumunda arka plan değişir */
+}
+
 /* Kategori Simge */
 .category-icon {
-  font-size: 1.8em;
-  margin-bottom: 5px;
+  font-size: 1.5em; /* Simge boyutu büyütüldü */
+  margin-bottom: 10px;
 }
 
 /* Kategori Başlık */
 .category-title {
-  font-size: 1.3em;
+  font-size: 1.0em; /* Başlık boyutu büyütüldü */
   color: #4a90e2;
-  margin: 5px 0;
+  margin: 10px 0;
 }
-
-
