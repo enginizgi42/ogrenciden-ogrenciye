@@ -31,7 +31,7 @@ function Home() {
     {
       title: "Not Paylaşma",
       image: "/images/notpaylasim.webp",
-      link: "/notpaylasim",
+      link: "/notpaylasim", // Rota doğru ayarlandı
       description: [
         "Ders notlarınızı paylaşarak diğer öğrencilere yardımcı olun.",
         "1-5 yıldız arasında puanlama sistemi ile notlarınızı değerlendirin.",
@@ -78,7 +78,7 @@ function Home() {
           <div
             key={index}
             className="module-section"
-            onClick={() => navigate(mod.link)}
+            onClick={() => navigate(mod.link)} // Doğru rota ayarlandı
           >
             <div className="module-title">{mod.title}</div>
             <img src={mod.image} alt={mod.title} className="module-image" />
