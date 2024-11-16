@@ -6,9 +6,12 @@ import {
   PlusCircleOutlined,
   HeartOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import "../styles/NotPaylasim.css";
 
 function NotPaylasim() {
+  const navigate = useNavigate();
+
   const categories = ["Matematik", "Fizik", "Kimya", "Biyoloji", "Tarih"];
 
   // Örnek trend notlar
@@ -30,13 +33,31 @@ function NotPaylasim() {
     },
   ];
 
+  const handleLogoClick = () => {
+    navigate("/home"); // Sadece logoya tıklanıldığında yönlendirme
+  };
+
+  const handleProfileClick = () => {
+    navigate("/profile");
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <div className="not-paylasim-wrapper">
       {/* Header */}
       <header className="not-paylasim-header">
         <div className="header-left">
-          <div className="logo-section" onClick={() => window.location.href = "/home"}>
-            <img src="/images/logo.jpg" alt="Logo" className="logo" />
+          <div className="logo-section">
+            <img
+              src="/images/logo.jpg"
+              alt="Logo"
+              className="logo"
+              onClick={handleLogoClick} // Sadece logo tıklamasına yönlendirme eklendi
+            />
             <span className="logo-text">Öğrenciden Öğrenciye</span>
             <Input
               placeholder="Aranacak notu yazınız"
@@ -64,6 +85,7 @@ function NotPaylasim() {
             type="text"
             icon={<UserOutlined />}
             className="header-button"
+            onClick={handleProfileClick}
           >
             Profilim
           </Button>
@@ -71,6 +93,7 @@ function NotPaylasim() {
             type="text"
             icon={<LogoutOutlined />}
             className="header-button"
+            onClick={handleLogoutClick}
           >
             Çıkış
           </Button>
@@ -91,7 +114,9 @@ function NotPaylasim() {
 
         {/* Trend Notlar Bölümü */}
         <section className="trend-notlar-section">
-          <h3>Trend Notlar</h3>
+          <h3>
+            Trend Notlar <span className="emoji">🔥</span>
+          </h3>
           <div className="trend-notes-list">
             {trendNotes.map((note, index) => (
               <div key={index} className="note-card">
