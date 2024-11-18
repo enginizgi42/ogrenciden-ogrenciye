@@ -68,7 +68,7 @@ function SecondHandItems() {
           <span className="logo-text">Öğrenciden Öğrenciye</span>
         </div>
         <Input
-          placeholder="Aradığınız ürün, kategori veya markayı yazınız"
+          placeholder="Aradığınız ürün, kategori veya markayı yazınız.."
           className="search-input"
           allowClear
         />
