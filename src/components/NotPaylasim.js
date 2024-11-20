@@ -4,6 +4,7 @@ import {
   UserOutlined,
   LogoutOutlined,
   PlusCircleOutlined,
+  HeartFilled,
   HeartOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -16,28 +17,16 @@ function NotPaylasim() {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
+  const [trendNotes, setTrendNotes] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [customCategory, setCustomCategory] = useState(""); // Yeni ders için state
+  const [customCategory, setCustomCategory] = useState("");
+  const [newNote, setNewNote] = useState({ title: "", description: "", category: "" });
+
+  const maxTitleLength = 50; // Başlık için maksimum karakter sınırı
 
   const categories = ["Matematik", "Fizik", "Kimya", "Biyoloji", "Tarih", "Diğer"];
-
-  const trendNotes = [
-    {
-      title: "İleri Matematik Ders Notları",
-      description: "Karmaşık sayılar ve integraller",
-      category: "Matematik",
-    },
-    {
-      title: "Organik Kimya Ders Notları",
-      description: "Hidrokarbonlar ve türevleri",
-      category: "Kimya",
-    },
-    {
-      title: "Fizik - Kuantum Mekaniği",
-      description: "Kuantum teorisi üzerine özet",
-      category: "Fizik",
-    },
-  ];
 
   const handleLogoClick = () => {
     navigate("/home");
@@ -58,36 +47,66 @@ function NotPaylasim() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedCategory(""); // Seçimi sıfırla
-    setCustomCategory(""); // Yeni ders alanını temizle
+    setSelectedCategory("");
+    setCustomCategory("");
+    setNewNote({ title: "", description: "", category: "" });
+  };
+
+  const openFavoritesModal = () => {
+    setIsFavoritesModalOpen(true);
+  };
+
+  const closeFavoritesModal = () => {
+    setIsFavoritesModalOpen(false);
   };
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
-    if (value !== "Diğer") {
-      setCustomCategory(""); // Eğer "Diğer" seçili değilse özel ders adını sıfırla
+    setNewNote((prev) => ({
+      ...prev,
+      category: value === "Diğer" ? customCategory : value,
+    }));
+  };
+
+  const handleSaveNote = () => {
+    const noteToAdd = {
+      id: trendNotes.length + 1,
+      title: newNote.title,
+      description: newNote.description,
+      category: selectedCategory === "Diğer" ? customCategory : selectedCategory,
+    };
+
+    setTrendNotes((prev) => [noteToAdd, ...prev]);
+    closeModal();
+  };
+
+  const toggleFavorite = (id) => {
+    if (favorites.includes(id)) {
+      setFavorites(favorites.filter((favId) => favId !== id));
+    } else {
+      setFavorites([...favorites, id]);
     }
   };
+
+  const favoriteNotes = trendNotes.filter((note) => favorites.includes(note.id));
 
   return (
     <div className="not-paylasim-wrapper">
       {/* Header */}
       <header className="not-paylasim-header">
-        <div className="header-left">
-          <div className="logo-section">
-            <img
-              src="/images/logo.jpg"
-              alt="Logo"
-              className="logo"
-              onClick={handleLogoClick}
-            />
-            <span className="logo-text">Öğrenciden Öğrenciye</span>
-            <Input
-              placeholder="Aranacak notu yazınız"
-              className="search-input"
-              allowClear
-            />
-          </div>
+        <div className="logo-section">
+          <img
+            src="/images/logo.jpg"
+            alt="Logo"
+            className="logo"
+            onClick={handleLogoClick}
+          />
+          <span className="logo-text">Öğrenciden Öğrenciye</span>
+          <Input
+            placeholder="Aranacak notu yazınız"
+            className="search-input"
+            allowClear
+          />
         </div>
         <div className="header-right">
           <Button
@@ -100,8 +119,9 @@ function NotPaylasim() {
           </Button>
           <Button
             type="text"
-            icon={<HeartOutlined />}
+            icon={<HeartFilled />}
             className="header-button"
+            onClick={openFavoritesModal}
           >
             Favorilerim
           </Button>
@@ -126,7 +146,6 @@ function NotPaylasim() {
 
       {/* Ana İçerik */}
       <div className="not-paylasim-content">
-        {/* Dersler Sidebar */}
         <aside className="sidebar">
           <h3>Dersler</h3>
           <ul>
@@ -136,17 +155,27 @@ function NotPaylasim() {
           </ul>
         </aside>
 
-        {/* Trend Notlar Bölümü */}
         <section className="trend-notlar-section">
           <h3>
             Trend Notlar <span className="emoji">🔥</span>
           </h3>
           <div className="trend-notes-list">
-            {trendNotes.map((note, index) => (
-              <div key={index} className="note-card">
-                <h3>{note.title}</h3>
+            {trendNotes.map((note) => (
+              <div key={note.id} className="note-card">
+                <h3 className="scrolling-title">{note.title}</h3>
                 <p>{note.description}</p>
                 <span className="note-category">{note.category}</span>
+                {favorites.includes(note.id) ? (
+                  <HeartFilled
+                    className="favorite-icon favorited"
+                    onClick={() => toggleFavorite(note.id)}
+                  />
+                ) : (
+                  <HeartOutlined
+                    className="favorite-icon"
+                    onClick={() => toggleFavorite(note.id)}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -187,20 +216,61 @@ function NotPaylasim() {
             </>
           )}
 
-          <label>Not Başlığı:</label>
-          <Input placeholder="Not başlığını girin" className="note-input" />
+          <label>Not Başlığı (Max {maxTitleLength} karakter):</label>
+          <Input
+            placeholder="Not başlığını girin"
+            className="note-input"
+            value={newNote.title}
+            onChange={(e) =>
+              e.target.value.length <= maxTitleLength &&
+              setNewNote((prev) => ({ ...prev, title: e.target.value }))
+            }
+          />
+          <p>{newNote.title.length}/{maxTitleLength} karakter</p>
 
           <label>Not İçeriği:</label>
           <TextArea
             placeholder="Notunuzu yazın"
             rows={4}
             className="note-textarea"
+            value={newNote.description}
+            onChange={(e) =>
+              setNewNote((prev) => ({ ...prev, description: e.target.value }))
+            }
           />
 
-          <Button type="primary" className="save-note-button" onClick={closeModal}>
+          <Button
+            type="primary"
+            className="save-note-button"
+            onClick={handleSaveNote}
+          >
             Kaydet
           </Button>
         </form>
+      </Modal>
+
+      {/* Favoriler Modal */}
+      <Modal
+        title="Favori Notlar"
+        visible={isFavoritesModalOpen}
+        onCancel={closeFavoritesModal}
+        footer={null}
+      >
+        {favoriteNotes.length > 0 ? (
+          <div className="favorites-list">
+            {favoriteNotes.map((note) => (
+              <div key={note.id} className="favorite-note-card">
+                <h4 className="scrolling-title">{note.title}</h4>
+                <HeartFilled
+                  className="favorite-icon favorited"
+                  onClick={() => toggleFavorite(note.id)}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Favorilerde henüz bir not yok.</p>
+        )}
       </Modal>
     </div>
   );

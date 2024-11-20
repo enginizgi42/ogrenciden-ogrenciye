@@ -108,9 +108,6 @@
   cursor: pointer;
   transition: color 0.2s ease, background-color 0.2s ease;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .sidebar ul li:hover {
@@ -142,6 +139,11 @@
   justify-content: center;
 }
 
+.trend-notlar-section .emoji {
+  font-size: 1.5rem;
+  margin-left: 8px;
+}
+
 .trend-notes-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -150,7 +152,7 @@
 }
 
 .note-card {
-  padding: 15px;
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -158,6 +160,49 @@
   text-align: left;
   width: 100%;
   max-width: 250px;
+  position: relative;
+  min-height: 150px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: marquee 8s linear infinite;
+  position: relative;
+}
+
+.note-card h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  background-color: #4a90e2;
+  width: 100%; /* Başlık uzunluğuyla eşleşir */
+}
+
+.note-card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  max-height: 4.2em; /* Yaklaşık 3 satır */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-card .note-category {
+  font-size: 0.85rem;
+  color: #4a90e2;
+  margin-top: 10px;
+  flex-shrink: 0;
 }
 
 .note-card:hover {
@@ -165,40 +210,99 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Not Ekle Modal */
-.note-form {
+.favorite-icon {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.2);
+}
+
+.favorited {
+  color: #ff5a5a;
+}
+
+/* Kayan Başlık Animasyonu */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Favoriler Modal */
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.favorite-note-card {
+  width: 300px;
+  height: 150px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: flex-start;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.note-select {
-  width: 100%;
+.favorite-note-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.note-input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+.favorite-note-card h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #4a90e2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: marquee 10s linear infinite;
+  position: relative;
 }
 
-.note-textarea {
-  width: 100%;
-  border-radius: 4px;
-  padding: 8px;
-}
-
-.save-note-button {
-  width: 100%;
+.favorite-note-card h4::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
   background-color: #4a90e2;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  padding: 10px;
+  width: 100%; /* Başlık uzunluğuyla eşleşir */
 }
 
-.save-note-button:hover {
-  background-color: #357ab8;
+.favorite-note-card .favorite-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.favorite-note-card .favorite-icon.favorited {
+  color: #ff5a5a;
+}
+
+.favorite-note-card .favorite-icon:hover {
+  transform: scale(1.2);
 }
