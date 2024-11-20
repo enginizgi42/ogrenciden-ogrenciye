@@ -10,15 +10,22 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    // E-posta formatını kontrol et
+    if (!email.endsWith(".edu.tr")) {
+      message.error("Lütfen geçerli bir .edu.tr uzantılı e-posta adresi girin!");
+      return;
+    }
+
     if (!email || !password) {
       message.error("Lütfen e-posta ve şifrenizi girin!");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5181/api/Auth/login", 
-        { email, password }, 
-        { headers: { 'Content-Type': 'application/json' } }
+      const response = await axios.post(
+        "http://localhost:5181/api/Auth/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
       );
 
       if (response.data.success) {

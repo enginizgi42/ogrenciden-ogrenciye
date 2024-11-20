@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import SecondHandItems from './components/SecondHandItems';
 import NotPaylasim from './components/NotPaylasim';
+import NewAd from './components/NewAd';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/ikincielesya" element={<SecondHandItems />} />
         <Route path="/notpaylasim" element={<NotPaylasim />} /> {/* Not paylaşım rotası */}
+        <Route path="/new-ad" element={<NewAd/>} />
+
       </Routes>
     </Router>
   );

@@ -1,5 +1,3 @@
-// SecondHandItems.js
-
 import React from "react";
 import { Input, Button } from "antd";
 import {
@@ -73,7 +71,11 @@ function SecondHandItems() {
           allowClear
         />
         <div className="header-buttons">
-          <Button type="text" icon={<PlusCircleOutlined />} onClick={() => navigate("/new-ad")}>
+          <Button
+            type="text"
+            icon={<PlusCircleOutlined />}
+            onClick={() => navigate("/new-ad")} // İlan Ver sayfasına yönlendirme
+          >
             İlan Ver
           </Button>
           <Button type="text" icon={<UserOutlined />} onClick={handleProfile}>

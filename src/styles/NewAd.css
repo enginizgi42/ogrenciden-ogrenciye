@@ -1,0 +1,72 @@
+/* Genel sayfa stili */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #69aaf5, #b3d8ff); /* Mavi geçişli arka plan */
+  }
+  
+  /* Sayfa düzeni */
+  .new-ad-page {
+    height: 100vh; /* Sayfanın tamamını kapsar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Scroll etkin */
+    padding: 20px;
+  }
+  
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    width: 900px; /* Genişletilmiş sayfa */
+    max-width: 70%;
+    text-align: center;
+    overflow-y:scroll; /* Yalnızca dikey kaydırma */
+    max-height: 100vh; /* Form kutusunun maksimum yüksekliği */
+  }
+  
+  /* Başlık */
+  .page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4a90e2;
+    margin-bottom: 20px;
+  }
+  
+  /* Form alanları */
+  .input-field {
+    width: 100%;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.4);
+  }
+  
+  /* Submit butonu */
+  .submit-button {
+    width: 100%;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #357ab8;
+    transform: scale(1.05);
+  }
+  

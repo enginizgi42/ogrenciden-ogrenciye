@@ -15,6 +15,16 @@ function Signup() {
   const navigate = useNavigate();
 
   const handleSignup = async () => {
+    if (firstName.length < 2) {
+      message.error("Ad en az 2 karakter uzunluğunda olmalıdır!");
+      return;
+    }
+
+    if (lastName.length < 2) {
+      message.error("Soyad en az 2 karakter uzunluğunda olmalıdır!");
+      return;
+    }
+
     if (password !== confirmPassword) {
       message.error("Şifreler eşleşmiyor!");
       return;
@@ -57,16 +67,13 @@ function Signup() {
   const handlePhoneChange = (e) => {
     let input = e.target.value;
 
-    // 0 ile başlarsa uyarı ver ve girişi önle
-    if (input.startsWith("0")) {
-      message.error("Lütfen telefon numaranızı 0 olmadan tuşlayınız..");
+    if (input.length === 1 && input !== "5") {
+      message.error("Telefon numarası 5 ile başlamalıdır!");
       return;
     }
 
-    // Sadece sayıları al ve maksimum 10 haneye sınırla
     input = input.replace(/\D/g, "").substring(0, 10);
 
-    // Formatı uygula: 531-531-31-31
     if (input.length >= 7) {
       input = input.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, "$1-$2-$3-$4");
     } else if (input.length >= 4) {
@@ -76,6 +83,14 @@ function Signup() {
     }
 
     setPhone(input);
+  };
+
+  const handleNameChange = (setter, value) => {
+    if (/^[a-zA-ZığüşöçİĞÜŞÖÇ\s]*$/.test(value) || value === "") {
+      setter(value);
+    } else {
+      message.error("Ad ve soyad sadece harf içerebilir!");
+    }
   };
 
   return (
@@ -90,7 +105,7 @@ function Signup() {
             <Form.Item label={<span className="bold-label">Ad</span>} required className="form-item">
               <Input
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => handleNameChange(setFirstName, e.target.value)}
                 placeholder="Adınızı girin"
                 className="input-field"
               />
@@ -98,7 +113,7 @@ function Signup() {
             <Form.Item label={<span className="bold-label">Soyad</span>} required className="form-item">
               <Input
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => handleNameChange(setLastName, e.target.value)}
                 placeholder="Soyadınızı girin"
                 className="input-field"
               />
@@ -118,7 +133,7 @@ function Signup() {
               <Input
                 value={phone}
                 onChange={handlePhoneChange}
-                placeholder="Telefon numaranızı girin (Örn: 531-531-31-31)"
+                placeholder="Telefon numaranızı girin"
                 className="input-field"
               />
             </Form.Item>

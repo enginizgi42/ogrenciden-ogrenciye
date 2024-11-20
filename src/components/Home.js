@@ -29,7 +29,7 @@ function Home() {
       ],
     },
     {
-      title: "Not Paylaşma",
+      title: "Ders Notu Paylaşma",
       image: "/images/notpaylasim.webp",
       link: "/notpaylasim", // Rota doğru ayarlandı
       description: [
