@@ -1,5 +1,5 @@
-import React from "react";
-import { Input, Button } from "antd";
+import React, { useState } from "react";
+import { Input, Button, Modal, Select } from "antd";
 import {
   UserOutlined,
   LogoutOutlined,
@@ -9,12 +9,18 @@ import {
 import { useNavigate } from "react-router-dom";
 import "../styles/NotPaylasim.css";
 
+const { TextArea } = Input;
+const { Option } = Select;
+
 function NotPaylasim() {
   const navigate = useNavigate();
 
-  const categories = ["Matematik", "Fizik", "Kimya", "Biyoloji", "Tarih"];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [customCategory, setCustomCategory] = useState(""); // Yeni ders için state
 
-  // Örnek trend notlar
+  const categories = ["Matematik", "Fizik", "Kimya", "Biyoloji", "Tarih", "Diğer"];
+
   const trendNotes = [
     {
       title: "İleri Matematik Ders Notları",
@@ -34,7 +40,7 @@ function NotPaylasim() {
   ];
 
   const handleLogoClick = () => {
-    navigate("/home"); // Sadece logoya tıklanıldığında yönlendirme
+    navigate("/home");
   };
 
   const handleProfileClick = () => {
@@ -44,6 +50,23 @@ function NotPaylasim() {
   const handleLogoutClick = () => {
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedCategory(""); // Seçimi sıfırla
+    setCustomCategory(""); // Yeni ders alanını temizle
+  };
+
+  const handleCategoryChange = (value) => {
+    setSelectedCategory(value);
+    if (value !== "Diğer") {
+      setCustomCategory(""); // Eğer "Diğer" seçili değilse özel ders adını sıfırla
+    }
   };
 
   return (
@@ -56,7 +79,7 @@ function NotPaylasim() {
               src="/images/logo.jpg"
               alt="Logo"
               className="logo"
-              onClick={handleLogoClick} // Sadece logo tıklamasına yönlendirme eklendi
+              onClick={handleLogoClick}
             />
             <span className="logo-text">Öğrenciden Öğrenciye</span>
             <Input
@@ -71,6 +94,7 @@ function NotPaylasim() {
             type="text"
             icon={<PlusCircleOutlined />}
             className="header-button"
+            onClick={openModal}
           >
             Not Ekle
           </Button>
@@ -128,6 +152,56 @@ function NotPaylasim() {
           </div>
         </section>
       </div>
+
+      {/* Not Ekle Modal */}
+      <Modal
+        title="Yeni Not Ekle"
+        visible={isModalOpen}
+        onCancel={closeModal}
+        footer={null}
+      >
+        <form className="note-form">
+          <label>Ders Seçiniz:</label>
+          <Select
+            placeholder="Bir ders seçin"
+            className="note-select"
+            onChange={handleCategoryChange}
+            value={selectedCategory}
+          >
+            {categories.map((category, index) => (
+              <Option key={index} value={category}>
+                {category}
+              </Option>
+            ))}
+          </Select>
+
+          {selectedCategory === "Diğer" && (
+            <>
+              <label>Yeni Ders Adı:</label>
+              <Input
+                placeholder="Ders adını girin"
+                className="note-input"
+                value={customCategory}
+                onChange={(e) => setCustomCategory(e.target.value)}
+              />
+            </>
+          )}
+
+          <label>Not Başlığı:</label>
+          <Input placeholder="Not başlığını girin" className="note-input" />
+
+          <label>Not İçeriği:</label>
+          <TextArea
+            placeholder="Notunuzu yazın"
+            rows={4}
+            className="note-textarea"
+          />
+
+          <Button type="primary" className="save-note-button" onClick={closeModal}>
+            Kaydet
+          </Button>
+        </form>
+      </Modal>
     </div>
   );
 }
