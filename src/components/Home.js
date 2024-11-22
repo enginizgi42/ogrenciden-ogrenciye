@@ -65,10 +65,20 @@ function Home() {
         <img src="/images/logo.jpg" alt="Logo" className="logo" />
         <h1 className="header-title">Öğrenciden Öğrenciye</h1>
         <div className="header-buttons">
-          <Button type="text" icon={<UserOutlined />} onClick={handleProfile} className="header-button">
+          <Button
+            type="default"
+            icon={<UserOutlined />}
+            onClick={handleProfile}
+            className="header-button"
+          >
             Hesabım
           </Button>
-          <Button type="text" icon={<LogoutOutlined />} onClick={handleLogout} className="header-button">
+          <Button
+            type="default"
+            icon={<LogoutOutlined />}
+            onClick={handleLogout}
+            className="header-button"
+          >
             Çıkış
           </Button>
         </div>
@@ -78,7 +88,7 @@ function Home() {
           <div
             key={index}
             className="module-section"
-            onClick={() => navigate(mod.link)} // Doğru rota ayarlandı
+            onClick={() => navigate(mod.link)}
           >
             <div className="module-title">{mod.title}</div>
             <img src={mod.image} alt={mod.title} className="module-image" />

@@ -29,7 +29,7 @@
   width: 80px;
   height: 80px;
   margin-right: 15px;
-  border-radius: 50%; /* Bu özellik logoyu yuvarlak hale getirir */
+  border-radius: 90%; /* Bu özellik logoyu yuvarlak hale getirir */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
   object-fit: cover;
 }
@@ -37,7 +37,7 @@
 .header-title {
   flex-grow: 1;
   text-align: center;
-  font-size: 1.8em;
+  font-size: 2em;
   color: #4a90e2;
   font-weight: bold;
 }
@@ -45,17 +45,31 @@
 .header-buttons {
   display: flex;
   gap: 15px;
+  color: #4a90e2; 
 }
 
 .header-button {
   font-size: 1em;
-  color: #4a90e2;
-  transition: color 0.3s ease, transform 0.3s ease;
+  color: #4a90e2; /* Buton metin rengi */
+  
+  border: 1px solid #4a90e2; /* Kenarlık rengi */
+  border-radius: 5px; /* Kenarların yuvarlatılması */
+  padding: 8px 15px; /* Buton içeriği aralığı */
+  transition: all 0.3s ease; /* Geçiş animasyonu */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Buton her zaman görünsün */
 }
 
 .header-button:hover {
-  color: #357ab8;
+  background-color: #357ab8; 
+  color: #fff; 
+  border-color: #357ab8; 
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hover durumunda gölge efekti */
+}
+
+.header-button:active {
+  background-color: #2b5d88; /* Tıklandığında arka plan rengi */
+  border-color: #2b5d88; /* Tıklandığında kenarlık rengi */
 }
 
 /* Modül kutuları */
