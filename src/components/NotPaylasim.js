@@ -20,13 +20,18 @@ function NotPaylasim() {
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const [trendNotes, setTrendNotes] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [categories, setCategories] = useState([
+    "Matematik",
+    "Fizik",
+    "Kimya",
+    "Biyoloji",
+    "Tarih",
+  ]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
   const [newNote, setNewNote] = useState({ title: "", description: "", category: "" });
 
-  const maxTitleLength = 50; // Başlık için maksimum karakter sınırı
-
-  const categories = ["Matematik", "Fizik", "Kimya", "Biyoloji", "Tarih", "Diğer"];
+  const maxTitleLength = 25; // Başlık için maksimum karakter sınırı
 
   const handleLogoClick = () => {
     navigate("/home");
@@ -69,6 +74,10 @@ function NotPaylasim() {
   };
 
   const handleSaveNote = () => {
+    if (selectedCategory === "Diğer" && customCategory) {
+      setCategories((prev) => [...prev, customCategory]);
+    }
+
     const noteToAdd = {
       id: trendNotes.length + 1,
       title: newNote.title,
@@ -162,7 +171,7 @@ function NotPaylasim() {
           <div className="trend-notes-list">
             {trendNotes.map((note) => (
               <div key={note.id} className="note-card">
-                <h3 className="scrolling-title">{note.title}</h3>
+                <h3>{note.title}</h3>
                 <p>{note.description}</p>
                 <span className="note-category">{note.category}</span>
                 {favorites.includes(note.id) ? (
@@ -202,6 +211,7 @@ function NotPaylasim() {
                 {category}
               </Option>
             ))}
+            <Option value="Diğer">Diğer</Option>
           </Select>
 
           {selectedCategory === "Diğer" && (
@@ -226,7 +236,9 @@ function NotPaylasim() {
               setNewNote((prev) => ({ ...prev, title: e.target.value }))
             }
           />
-          <p>{newNote.title.length}/{maxTitleLength} karakter</p>
+          <p>
+            {newNote.title.length}/{maxTitleLength} karakter
+          </p>
 
           <label>Not İçeriği:</label>
           <TextArea
@@ -260,7 +272,7 @@ function NotPaylasim() {
           <div className="favorites-list">
             {favoriteNotes.map((note) => (
               <div key={note.id} className="favorite-note-card">
-                <h4 className="scrolling-title">{note.title}</h4>
+                <h4>{note.title}</h4>
                 <HeartFilled
                   className="favorite-icon favorited"
                   onClick={() => toggleFavorite(note.id)}
