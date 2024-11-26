@@ -74,7 +74,7 @@ function SecondHandItems() {
           <Button
             type="text"
             icon={<PlusCircleOutlined />}
-            onClick={() => navigate("/new-ad")} // İlan Ver sayfasına yönlendirme
+            onClick={() => navigate("/new-ad")} 
           >
             İlan Ver
           </Button>
@@ -87,9 +87,7 @@ function SecondHandItems() {
           <Button type="text" icon={<MessageOutlined />} onClick={() => navigate("/messages")}>
             Mesajlar
           </Button>
-          <Button type="text" icon={<ShoppingCartOutlined />} onClick={() => navigate("/cart")}>
-            Sepetim
-          </Button>
+         
           <Button type="text" icon={<LogoutOutlined />} onClick={handleLogout}>
             Çıkış
           </Button>

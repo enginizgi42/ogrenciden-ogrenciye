@@ -10,7 +10,6 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    // E-posta formatını kontrol et
     if (!email.endsWith(".edu.tr")) {
       message.error("Lütfen geçerli bir .edu.tr uzantılı e-posta adresi girin!");
       return;
@@ -31,7 +30,8 @@ function Login() {
       if (response.data.success) {
         message.success("Başarıyla giriş yapıldı!");
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userEmail", email); // Kullanıcının e-posta adresini kaydetme
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userName", response.data.name); // Kullanıcının adını kaydediyoruz
         navigate("/home");
       } else {
         message.error("Kullanıcı adı veya şifre hatalı!");

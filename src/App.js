@@ -18,7 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ikincielesya" element={<SecondHandItems />} />
-        <Route path="/notpaylasim" element={<NotPaylasim />} /> {/* Not paylaşım rotası */}
+        <Route path="/notpaylasim" element={<NotPaylasim />} /> 
         <Route path="/new-ad" element={<NewAd/>} />
 
       </Routes>
