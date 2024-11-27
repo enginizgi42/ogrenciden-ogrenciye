@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Input, Button, Modal, Select } from "antd";
+import { Input, Button, Modal, Select, Upload } from "antd";
 import {
   UserOutlined,
   LogoutOutlined,
   PlusCircleOutlined,
   HeartFilled,
   HeartOutlined,
+  UploadOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "../styles/NotPaylasim.css";
@@ -18,7 +19,9 @@ function NotPaylasim() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
+  const [isNoteDetailModalOpen, setIsNoteDetailModalOpen] = useState(false);
   const [trendNotes, setTrendNotes] = useState([]);
+  const [selectedNote, setSelectedNote] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [categories, setCategories] = useState([
     "Matematik",
@@ -29,9 +32,15 @@ function NotPaylasim() {
   ]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
-  const [newNote, setNewNote] = useState({ title: "", description: "", category: "" });
+  const [newNote, setNewNote] = useState({
+    title: "",
+    description: "",
+    fullContent: "",
+    category: "",
+    photo: null,
+  });
 
-  const maxTitleLength = 25; // Başlık için maksimum karakter sınırı
+  const maxTitleLength = 25;
 
   const handleLogoClick = () => {
     navigate("/home");
@@ -54,7 +63,7 @@ function NotPaylasim() {
     setIsModalOpen(false);
     setSelectedCategory("");
     setCustomCategory("");
-    setNewNote({ title: "", description: "", category: "" });
+    setNewNote({ title: "", description: "", fullContent: "", category: "", photo: null });
   };
 
   const openFavoritesModal = () => {
@@ -65,12 +74,28 @@ function NotPaylasim() {
     setIsFavoritesModalOpen(false);
   };
 
+  const openNoteDetail = (note) => {
+    setSelectedNote(note);
+    setIsNoteDetailModalOpen(true);
+  };
+
+  const closeNoteDetail = () => {
+    setIsNoteDetailModalOpen(false);
+    setSelectedNote(null);
+  };
+
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
     setNewNote((prev) => ({
       ...prev,
       category: value === "Diğer" ? customCategory : value,
     }));
+  };
+
+  const handleFileChange = (info) => {
+    if (info.file.status === "done") {
+      setNewNote((prev) => ({ ...prev, photo: info.file.originFileObj }));
+    }
   };
 
   const handleSaveNote = () => {
@@ -82,7 +107,9 @@ function NotPaylasim() {
       id: trendNotes.length + 1,
       title: newNote.title,
       description: newNote.description,
+      fullContent: newNote.fullContent,
       category: selectedCategory === "Diğer" ? customCategory : selectedCategory,
+      photo: newNote.photo,
     };
 
     setTrendNotes((prev) => [noteToAdd, ...prev]);
@@ -153,7 +180,7 @@ function NotPaylasim() {
         </div>
       </header>
 
-      {/* Ana İçerik */}
+      {/* Main Content */}
       <div className="not-paylasim-content">
         <aside className="sidebar">
           <h3>Dersler</h3>
@@ -170,19 +197,30 @@ function NotPaylasim() {
           </h3>
           <div className="trend-notes-list">
             {trendNotes.map((note) => (
-              <div key={note.id} className="note-card">
+              <div
+                key={note.id}
+                className="note-card"
+                onClick={() => openNoteDetail(note)}
+              >
                 <h3>{note.title}</h3>
                 <p>{note.description}</p>
+                {note.photo && <img src={URL.createObjectURL(note.photo)} alt="Note" className="note-image" />}
                 <span className="note-category">{note.category}</span>
                 {favorites.includes(note.id) ? (
                   <HeartFilled
                     className="favorite-icon favorited"
-                    onClick={() => toggleFavorite(note.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(note.id);
+                    }}
                   />
                 ) : (
                   <HeartOutlined
                     className="favorite-icon"
-                    onClick={() => toggleFavorite(note.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(note.id);
+                    }}
                   />
                 )}
               </div>
@@ -191,7 +229,7 @@ function NotPaylasim() {
         </section>
       </div>
 
-      {/* Not Ekle Modal */}
+      {/* Add Note Modal */}
       <Modal
         title="Yeni Not Ekle"
         visible={isModalOpen}
@@ -240,16 +278,36 @@ function NotPaylasim() {
             {newNote.title.length}/{maxTitleLength} karakter
           </p>
 
-          <label>Not İçeriği:</label>
-          <TextArea
-            placeholder="Notunuzu yazın"
-            rows={4}
-            className="note-textarea"
+          <label>Not Açıklaması:</label>
+          <Input
+            placeholder="Kısa bir açıklama yazın"
+            className="note-input"
             value={newNote.description}
             onChange={(e) =>
               setNewNote((prev) => ({ ...prev, description: e.target.value }))
             }
           />
+
+          <label>Detaylı Not:</label>
+          <TextArea
+            placeholder="Detaylı notunuzu buraya yazın"
+            rows={4}
+            className="note-textarea"
+            value={newNote.fullContent}
+            onChange={(e) =>
+              setNewNote((prev) => ({ ...prev, fullContent: e.target.value }))
+            }
+          />
+
+          <label>Fotoğraf Yükle:</label>
+          <Upload
+            accept="image/*"
+            maxCount={1}
+            beforeUpload={() => false}
+            onChange={handleFileChange}
+          >
+            <Button icon={<UploadOutlined />}>Fotoğraf Seç</Button>
+          </Upload>
 
           <Button
             type="primary"
@@ -261,27 +319,20 @@ function NotPaylasim() {
         </form>
       </Modal>
 
-      {/* Favoriler Modal */}
+      {/* Note Detail Modal */}
       <Modal
-        title="Favori Notlar"
-        visible={isFavoritesModalOpen}
-        onCancel={closeFavoritesModal}
+        title={selectedNote?.title || "Detaylı Not"}
+        visible={isNoteDetailModalOpen}
+        onCancel={closeNoteDetail}
         footer={null}
       >
-        {favoriteNotes.length > 0 ? (
-          <div className="favorites-list">
-            {favoriteNotes.map((note) => (
-              <div key={note.id} className="favorite-note-card">
-                <h4>{note.title}</h4>
-                <HeartFilled
-                  className="favorite-icon favorited"
-                  onClick={() => toggleFavorite(note.id)}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>Favorilerde henüz bir not yok.</p>
+        <p>{selectedNote?.fullContent}</p>
+        {selectedNote?.photo && (
+          <img
+            src={URL.createObjectURL(selectedNote.photo)}
+            alt="Note"
+            className="note-detail-image"
+          />
         )}
       </Modal>
     </div>
