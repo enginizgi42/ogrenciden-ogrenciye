@@ -1,0 +1,43 @@
+.evarkadasi-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f8ff; /* Mavi ton */
+    min-height: 100vh;
+  }
+  
+  .evarkadasi-header {
+    font-size: 2em;
+    color: #4a90e2;
+    margin-bottom: 10px;
+  }
+  
+  .evarkadasi-description {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .evarkadasi-content {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .evarkadasi-button {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .evarkadasi-button:hover {
+    background-color: #357abd;
+  }
+  

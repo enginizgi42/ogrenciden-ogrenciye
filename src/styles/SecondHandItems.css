@@ -38,7 +38,7 @@
 
 .search-input {
   flex: 1;
-  max-width: 500px;
+  max-width: 400px;
   margin: 0 20px;
 }
 
@@ -246,14 +246,4 @@
 
 
 
-/* Mobil Uyumluluk */
-@media (max-width: 768px) {
-  .ads-container {
-    margin-left: 0;
-    grid-template-columns: repeat(2, 1fr);
-  }
 
-  .sidebar {
-    display: none;
-  }
-}
