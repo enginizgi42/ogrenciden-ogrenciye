@@ -7,7 +7,7 @@ import Profile from './components/Profile';
 import SecondHandItems from './components/SecondHandItems';
 import NotPaylasim from './components/NotPaylasim';
 import NewAd from './components/NewAd';
-
+import DersBul from './components/DersBul';
 function App() {
   return (
     <Router>
@@ -20,6 +20,7 @@ function App() {
         <Route path="/ikincielesya" element={<SecondHandItems />} />
         <Route path="/notpaylasim" element={<NotPaylasim />} /> 
         <Route path="/new-ad" element={<NewAd/>} />
+        <Route path="/dersilani2" element={<DersBul />} /> 
 
       </Routes>
     </Router>
