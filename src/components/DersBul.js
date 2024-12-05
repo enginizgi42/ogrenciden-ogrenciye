@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+
 import "../styles/DersBul.css"; // CSS dosyasını içe aktarın
 
 const DersBul = () => {
@@ -76,6 +77,11 @@ const DersBul = () => {
       {/* Header */}
       <div className="header">
         <h1>Okul Ders Listesi ve Seans Seçimi</h1>
+        <div className="top-right-menu">
+          <img src="logo.jpg" alt="Logo" className="logo" />
+          <a href="/home" className="menu-item">Home</a>
+          <a href="/login" className="menu-item">Login</a>
+        </div>
       </div>
 
       {/* Ana içerik */}
