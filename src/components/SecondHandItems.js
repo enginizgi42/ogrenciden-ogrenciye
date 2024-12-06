@@ -9,7 +9,7 @@ function SecondHandItems() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [hoveredCategory, setHoveredCategory] = useState(null); // Sidebar için gerekli state
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,6 +37,14 @@ function SecondHandItems() {
 
   const handleProfile = () => {
     navigate("/profile");
+  };
+
+  const handleMessages = () => {
+    navigate("/messages");
+  };
+
+  const handleMyAds = () => {
+    navigate("/my-ads");
   };
 
   const categories = [
@@ -89,9 +97,22 @@ function SecondHandItems() {
           <Button type="text" icon={<PlusCircleOutlined />} onClick={() => navigate("/new-ad")}>
             İlan Ver
           </Button>
-          <Button type="text" icon={<UserOutlined />} onClick={handleProfile}>
-            Hesabım
-          </Button>
+          <div
+            className="account-dropdown-container"
+            onMouseEnter={() => setHoveredCategory("account")}
+            onMouseLeave={() => setHoveredCategory(null)}
+          >
+            <Button type="text" icon={<UserOutlined />}>
+              Hesabım
+            </Button>
+            {hoveredCategory === "account" && (
+              <div className="account-dropdown">
+                <div onClick={handleProfile}>Kullanıcı Bilgilerim</div>
+                <div onClick={handleMessages}>Mesajlar</div>
+                <div onClick={handleMyAds}>İlanlarım</div>
+              </div>
+            )}
+          </div>
           <Button type="text" icon={<HeartOutlined />}>
             Favorilerim
           </Button>

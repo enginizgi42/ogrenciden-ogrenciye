@@ -38,7 +38,7 @@
 
 .search-input {
   flex: 1;
-  max-width: 500px;
+  max-width: 400px;
   margin: 0 20px;
 }
 
@@ -56,6 +56,8 @@
   background-color: #f8f8fc;
   height: calc(100vh - 80px);
   padding-top: 10px;
+  z-index: 10;
+  overflow: visible;
 }
 
 .category-card {
@@ -83,7 +85,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   padding: 10px;
-  z-index: 1000; /* Çok yüksek bir z-index, diğer her şeyin üstünde gösterir */
+  z-index: 9999; /* Çok yüksek bir z-index, diğer her şeyin üstünde gösterir */
 }
 
 /* Hover durumunda dropdown menü görünür */
@@ -108,21 +110,20 @@
   background-color: #f0f8ff; /* Hover için arka plan rengi */
 }
 
-
-
 /* Ürün Listesi */
 .ads-container {
-  margin-left: 220px;
+  margin-left: 220px; /* Sidebar'ın sağında başlayacak */
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Aynı satıra 4-5 kart */
-  gap: 20px;
+  grid-template-columns: repeat(6, 1fr); /* Her satırda 6 kart */
+  justify-items: center; /* Kartları ortalar */
+  position: relative; /* Z-index hiyerarşisini doğru kurar */
+  z-index: 1; /* Dropdown'un altında kalır */
 }
 
 /* Ürün Kartları */
 .ad-card {
   position: relative;
-  z-index: 1; /* Kartın alt sıralamada kalması sağlanır */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -131,17 +132,15 @@
   transition: transform 0.3s ease;
   background-color: #ffffff;
   padding: 10px;
-  width: 200px;
-  height: 350px;
-  margin-top: 80px;
-  
+  width: 200px; /* Kart genişliği */
+  height: 350px; /* Kart yüksekliği */
+  margin-top: 70px; 
+  z-index: 1;
 }
 
 .ad-card:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  
-  
 }
 
 /* Favori Kalp */
@@ -155,8 +154,8 @@
   transition: color 0.3s ease;
 }
 
-.favorite-icon:hover {
-  color: #f44336;
+.favorite-icon.active {
+  color: #f44336; /* Favoriye eklenince kırmızı olur */
 }
 
 /* Kart Görseli */
@@ -164,7 +163,6 @@
   width: 100%;
   height: 180px; /* Görsel tam görünsün */
   text-align: center;
-  
 }
 
 .ad-image {
@@ -215,17 +213,37 @@
   background-color: #357abd;
 }
 
-
-
-
-/* Mobil Uyumluluk */
-@media (max-width: 768px) {
-  .ads-container {
-    margin-left: 0;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sidebar {
-    display: none;
-  }
+/* Hesabım Dropdown */
+.account-dropdown-container {
+  position: relative;
 }
+
+.account-dropdown {
+  position: absolute;
+  top: 40px; /* Dropdown, butonun hemen altına gelir */
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  width: 150px;
+}
+
+.account-dropdown div {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover durumunda belirginleştir */
+.account-dropdown div:hover {
+  background-color: #4a90e2; /* Mavi arka plan */
+  color: #fff; /* Yazı rengi beyaz */
+}
+
+
+
+
+
